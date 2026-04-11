@@ -3,6 +3,7 @@ package com.example.flatbookingapp.models
 import java.io.Serializable
 
 data class Property(
+    val id: String, // ADD THIS LINE (Unique ID for each property)
     val title: String,
     val description: String,
     val rent: Int,
