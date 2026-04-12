@@ -22,4 +22,13 @@
         android:clipToPadding="false"
         android:paddingBottom="16dp"/>
 
+    <TextView
+        android:id="@+id/tvEmptyMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No saved properties yet!"
+        android:textSize="18sp"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
 </LinearLayout>

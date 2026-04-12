@@ -14,7 +14,8 @@ data class Property(
     val transportCost: Double,
     val flexibleLease: Boolean,
     val visaCompatible: Boolean,
-    val studySpace: Boolean
+    val studySpace: Boolean ,
+    var isSaved: Boolean = false , // Add this line
 ): Serializable
 // Added this new class for sending data TO the server
 data class PropertyRequest(

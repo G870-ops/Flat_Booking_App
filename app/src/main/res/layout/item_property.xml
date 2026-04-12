@@ -44,27 +44,22 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:src="@android:drawable/btn_star_big_off"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="Save Property"
-                    tools:ignore="TouchTargetSizeCheck" />
+                    android:src="@android:drawable/btn_star_big_off"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
             </RelativeLayout>
 
             <TextView
                 android:id="@+id/tvType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Studio"
-                android:layout_marginTop="4dp" />
+                android:text="Studio" />
 
             <TextView
                 android:id="@+id/tvDistance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0.5 mi from campus"
-                android:drawableStart="@android:drawable/ic_menu_mylocation"
-                android:drawablePadding="8dp"
                 android:layout_marginTop="8dp" />
 
             <LinearLayout
@@ -82,12 +77,21 @@
                     android:text="Quick View" />
 
                 <Button
-                    android:id="@+id/btnContact"
+                    android:id="@+id/btnBookNow"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     style="?android:attr/buttonBarButtonStyle"
-                    android:text="Contact" />
+                    android:text="Book Now"
+                    android:textColor="#4CAF50" />
+                <Button
+                    android:id="@+id/btnListProperty"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:text="List Property"
+                    android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

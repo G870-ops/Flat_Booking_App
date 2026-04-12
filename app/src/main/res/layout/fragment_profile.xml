@@ -129,16 +129,65 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <TextView android:id="@+id/btnMyBookings" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="My Bookings" android:paddingVertical="16dp" android:drawableStart="@android:drawable/ic_menu_my_calendar" android:drawablePadding="16dp"/>
-        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0"/>
+        <TextView
+            android:id="@+id/btnMyBookings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="My Bookings"
+            android:paddingVertical="16dp"
+            android:drawableStart="@android:drawable/ic_menu_my_calendar"
+            android:drawablePadding="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"/>
+        <View
+        android:id="@+id/dividerBookings"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E0E0E0"/>
 
-        <TextView android:id="@+id/btnSavedProperties" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Saved Properties" android:paddingVertical="16dp" android:drawableStart="@android:drawable/ic_menu_save" android:drawablePadding="16dp"/>
-        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0"/>
+        <TextView
+            android:id="@+id/btnSavedProperties"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Saved Properties"
+            android:paddingVertical="16dp"
+            android:drawableStart="@android:drawable/ic_menu_save"
+            android:drawablePadding="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"/>
 
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Messages (3 unread)" android:paddingVertical="16dp" android:drawableStart="@android:drawable/sym_action_chat" android:drawablePadding="16dp"/>
-        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0"/>
+        <View
+            android:id="@+id/dividerSaved"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"/>
 
-        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Settings" android:paddingVertical="16dp" android:drawableStart="@android:drawable/ic_menu_preferences" android:drawablePadding="16dp"/>
+        <TextView
+            android:id="@+id/btnMessages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Messages (3 unread)"
+            android:paddingVertical="16dp"
+            android:drawableStart="@android:drawable/sym_action_chat"
+            android:drawablePadding="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"/> <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0"/>
+
+        <TextView
+            android:id="@+id/btnSettings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:paddingVertical="16dp"
+            android:drawableStart="@android:drawable/ic_menu_preferences"
+            android:drawablePadding="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"/>
+
         <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0"/>
 
         <Button

@@ -69,7 +69,7 @@
                 android:contentDescription="Property Preview" />
 
             <Button
-                android:id="@+id/btnOpenGallery"
+                android:id="@+id/btnGallery"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Select Images from Gallery"

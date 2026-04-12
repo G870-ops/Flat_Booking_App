@@ -17,7 +17,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         // 1. Get the Role passed from WelcomeActivity (USER or LANDLORD)
-        val selectedRole = intent.getStringExtra("ROLE")
+        val selectedRole = intent.getStringExtra("ROLE") ?: "USER"
 
         val etEmail = findViewById<EditText>(R.id.etEmail)
         val etPassword = findViewById<EditText>(R.id.etPassword)
@@ -27,7 +27,6 @@ class LoginActivity : AppCompatActivity() {
         // Update UI based on role
         tvLoginTitle.text = "$selectedRole LOGIN"
 
-        // 2. Login Logic with Role Validation
         btnLogin.setOnClickListener {
             val email = etEmail.text.toString().trim()
             val pass = etPassword.text.toString().trim()
@@ -37,35 +36,36 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            // 2. UNIFIED LOGIN LOGIC
+            // Both paths now lead to MainActivity to avoid "Unresolved Reference" errors
             if (selectedRole == "USER") {
-                // Validate User Credentials: goutam435@gmail.com
                 if (email == "goutam435@gmail.com" && pass == "Goutam435@") {
-                    Toast.makeText(this, "User Login Successful", Toast.LENGTH_SHORT).show()
-                    val nextIntent = Intent(this, UserHomeActivity::class.java)
-                    nextIntent.putExtra("USER_TYPE", "USER")
-                    startActivity(nextIntent)
-                    finish()
+                    navigateToMain("USER")
                 } else {
                     Toast.makeText(this, "Invalid User Credentials", Toast.LENGTH_SHORT).show()
                 }
 
             } else if (selectedRole == "LANDLORD") {
-                // Validate Landlord Credentials: priyam435@gmail.com
                 if (email == "priyam435@gmail.com" && pass == "Priyam435@") {
-                    Toast.makeText(this, "Landlord Login Successful", Toast.LENGTH_SHORT).show()
-
-                    // FIXED: Navigating to LandlordHomeActivity to solve "Unresolved reference"
-                    val landlordIntent = Intent(this, LandlordHomeActivity::class.java)
-                    landlordIntent.putExtra("USER_TYPE", "LANDLORD")
-                    startActivity(landlordIntent)
-                    finish()
+                    navigateToMain("LANDLORD")
                 } else {
                     Toast.makeText(this, "Invalid Landlord Credentials", Toast.LENGTH_SHORT).show()
                 }
             }
         }
 
-        // Hide Signup button as accounts are pre-defined
+        // Hide Signup button per requirements
         findViewById<Button>(R.id.btnSignup).visibility = android.view.View.GONE
+    }
+
+    private fun navigateToMain(role: String) {
+        val prefs = getSharedPreferences("PREFS", MODE_PRIVATE)
+        prefs.edit().putString("USER_TYPE", role).apply()
+
+        Toast.makeText(this, "$role Login Successful", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("USER_TYPE", role)
+        startActivity(intent)
+        finish() // Closes LoginActivity so user can't go back
     }
 }
