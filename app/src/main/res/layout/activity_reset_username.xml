@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center_horizontal"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Recover Username"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="20dp"/>
+
+    <EditText
+        android:id="@+id/etPhoneRecovery"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:hint="Enter Registered Phone Number"
+        android:inputType="phone"
+        android:padding="12dp"
+        android:background="@android:drawable/editbox_background"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/btnRecoverUsername"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="Find My Username"
+        android:backgroundTint="#4CAF50"
+        android:textColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/tvUsernameResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textSize="16sp"
+        android:textColor="#D32F2F"
+        android:visibility="gone"
+        android:textStyle="italic"/>
+</LinearLayout>

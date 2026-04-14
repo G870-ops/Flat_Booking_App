@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="16dp"
+    android:layout_margin="8dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="2dp">
 
@@ -27,40 +27,82 @@
             android:orientation="vertical"
             android:padding="12dp">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Premium Flat"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000" />
 
                 <TextView
                     android:id="@+id/tvPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$850/mo"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
+                    android:textColor="#4CAF50"
                     android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="123 University Ave"
+                android:layout_marginTop="4dp" />
+
+            <TextView
+                android:id="@+id/tvPostcode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Kolkata 741235"
+                android:textSize="12sp"
+                android:textColor="#757575" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/tvType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Studio" />
 
                 <ImageButton
                     android:id="@+id/starButton"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:src="@android:drawable/btn_star_big_off"
                     tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
             </RelativeLayout>
 
             <TextView
-                android:id="@+id/tvType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Studio" />
-
-            <TextView
                 android:id="@+id/tvDistance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0.5 mi from campus"
-                android:layout_marginTop="8dp" />
+                android:text="0.5 mi from campus" />
+
+            <TextView
+                android:id="@+id/tvDateLine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Posted: 2 hours ago"
+                android:textSize="11sp"
+                android:textStyle="italic" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -84,6 +126,7 @@
                     style="?android:attr/buttonBarButtonStyle"
                     android:text="Book Now"
                     android:textColor="#4CAF50" />
+
                 <Button
                     android:id="@+id/btnListProperty"
                     android:layout_width="0dp"

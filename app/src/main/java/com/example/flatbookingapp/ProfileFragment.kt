@@ -1,5 +1,6 @@
 package com.example.flatbookingapp
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -7,77 +8,78 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 
 class ProfileFragment : Fragment() {
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
 
-        // --- 1. INITIALIZE ALL VIEWS ---
-        val btnListProperty = view.findViewById<Button>(R.id.btnListProperty)
-        val btnMyBookings = view.findViewById<View>(R.id.btnMyBookings)
-        val btnSaved = view.findViewById<View>(R.id.btnSavedProperties)
-        val btnManage = view.findViewById<Button>(R.id.btnListViewProperty)
-        val btnLogout = view.findViewById<Button>(R.id.btnLogout)
-
-        // Dividers (Ensure these IDs exist in your fragment_profile.xml)
+        // --- 1. INITIALIZE ALL VIEWS FROM YOUR XML ---
+        val btnMyBookings = view.findViewById<TextView>(R.id.btnMyBookings)
+        val btnSavedProperties = view.findViewById<TextView>(R.id.btnSavedProperties)
         val divBookings = view.findViewById<View>(R.id.dividerBookings)
         val divSaved = view.findViewById<View>(R.id.dividerSaved)
 
-        // --- 2. FETCH USER ROLE FROM SHAREDPREFS ---
+        val btnListProperty = view.findViewById<Button>(R.id.btnListProperty)
+        val btnPostHistory = view.findViewById<Button>(R.id.btnPostHistory)
+
+
+
+        val btnLogout = view.findViewById<Button>(R.id.btnLogout)
+
+        // --- 2. FETCH USER ROLE ---
         val sharedPref = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val userType = sharedPref.getString("USER_TYPE", "USER")
 
-        // --- 3. APPLY VISIBILITY LOGIC ---
+        // --- 3. APPLY FLOW LOGIC ---
         if (userType == "LANDLORD") {
+            // --- LANDLORD FLOW ---
+            // Hide Student Sections
             btnMyBookings?.visibility = View.GONE
-            btnSaved?.visibility = View.GONE
+            btnSavedProperties?.visibility = View.GONE
             divBookings?.visibility = View.GONE
             divSaved?.visibility = View.GONE
 
-            btnManage?.visibility = View.VISIBLE
-            btnListProperty?.visibility = View.VISIBLE
-        } else {
-            btnMyBookings?.visibility = View.VISIBLE
-            btnSaved?.visibility = View.VISIBLE
-            divBookings?.visibility = View.VISIBLE
-            divSaved?.visibility = View.VISIBLE
 
-            btnManage?.visibility = View.GONE
-            btnListProperty?.visibility = View.GONE
-
-            // UPDATED LISTENERS TO PREVENT CRASHES
-            btnMyBookings?.setOnClickListener {
-                // If you don't have a MyBookingsActivity, keep this commented or
-                // replace with Fragment transaction logic.
-                android.widget.Toast.makeText(requireContext(), "My Bookings clicked", android.widget.Toast.LENGTH_SHORT).show()
+            btnListProperty?.setOnClickListener {
+                val intent = Intent(requireContext(), ListPropertyActivity::class.java)
+                startActivity(intent)
+            }
+            btnPostHistory?.setOnClickListener {
+                val intent = Intent(requireContext(), ListPropertyActivity::class.java)
+                startActivity(intent)
             }
 
-            btnSaved?.setOnClickListener {
-                // If SavedFragment is used, navigate via your Activity's BottomNavigationView
+        } else {
+            // --- USER FLOW ---
+            // Hide Landlord Dashboard Buttons
+            btnListProperty?.visibility = View.GONE
+            btnPostHistory?.visibility = View.GONE
+
+
+
+            // Setup Student Features
+            btnMyBookings?.setOnClickListener {
+                Toast.makeText(requireContext(), "Opening My Bookings...", Toast.LENGTH_SHORT).show()
+            }
+
+            btnSavedProperties?.setOnClickListener {
                 activity?.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottom_navigation)?.selectedItemId = R.id.nav_saved
             }
+
+
+
+
         }
 
-        // --- 4. EXISTING LOGIC (PERSISTED) ---
-
-        // Landlord Manage Logic
-        btnManage?.setOnClickListener {
-            val intent = Intent(requireContext(), ListPropertyActivity::class.java)
-            startActivity(intent)
-        }
-
-        // Existing List Property Listener
-        btnListProperty?.setOnClickListener {
-            val intent = Intent(requireContext(), ListPropertyActivity::class.java)
-            startActivity(intent)
-        }
-
-        // Logout Logic (Clears Activity Stack)
+        // --- 4. LOGOUT LOGIC (Common for all) ---
         btnLogout?.setOnClickListener {
             val intent = Intent(requireContext(), WelcomeActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

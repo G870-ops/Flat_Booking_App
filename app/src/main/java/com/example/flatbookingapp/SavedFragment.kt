@@ -30,22 +30,26 @@ class SavedFragment : Fragment() {
 
         // --- UPDATED LOGIC: MERGING FIXED DATA WITH DYNAMIC DATA ---
 
-        // 1. Add Fixed Data (Only if not already in the list to avoid duplicates)
+        // --- UPDATED LOGIC: MERGING FIXED DATA WITH DYNAMIC DATA ---
+
         if (savedList.none { it.id == "prop_01" }) {
             savedList.add(
                 Property(
-                    "prop_01",
-                    "Premium Student Flat",
-                    "Private flat with study room.",
-                    900,
-                    "Central",
-                    1.5,
-                    1.0,
-                    15,
-                    8.0,
-                    true,
-                    true,
-                    true
+                    id = "prop_01",
+                    title = "Premium Student Flat",
+                    description = "Private flat with study room.",
+                    price = "900", // Added price field to match your unified model
+                    rent = 900,
+                    location = "Central",
+                    imageUrl = "https://example.com/student_flat.jpg", // FIXED: Added missing parameter
+                    distanceToUniversity = 1.5,
+                    distanceToWork = 1.0,
+                    commuteTime = 15,
+                    transportCost = 8.0,
+                    flexibleLease = true,
+                    visaCompatible = true,
+                    studySpace = true,
+                    isFeatured = false
                 )
             )
         }

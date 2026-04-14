@@ -61,32 +61,28 @@ class HomeFragment : Fragment() {
             filterLauncher.launch(intent)
         }
 
-        // Fetch Live Data!
+        // NOTE: btnListProperty logic is removed from here to prevent duplicate actions
+        // and because the button was deleted from fragment_home.xml
+
         fetchPropertiesFromApi()
 
         return view
     }
 
     private fun fetchPropertiesFromApi() {
-        // Use Coroutines to make the network request on a background thread
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                // This calls the Ktor Server!
                 val liveProperties = RetrofitClient.apiService.getProperties()
-
-                // Switch back to the Main thread to update the UI
                 withContext(Dispatchers.Main) {
                     masterPropertyList.clear()
                     masterPropertyList.addAll(liveProperties)
-
                     displayList.clear()
                     displayList.addAll(liveProperties)
-
                     propertyAdapter.notifyDataSetChanged()
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(requireContext(), "Failed to load data: ${e.message}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
         }
