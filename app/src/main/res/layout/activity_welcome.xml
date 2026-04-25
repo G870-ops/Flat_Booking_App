@@ -71,6 +71,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent">
 
+
         <Button
             android:id="@+id/btnUser"
             android:layout_width="match_parent"
@@ -85,6 +86,14 @@
             android:layout_height="56dp"
             android:text="LANDLORD"
             android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/btnAdminDashboard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login as System Admin"
+            android:backgroundTint="#1A237E"
+            android:layout_marginTop="10dp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

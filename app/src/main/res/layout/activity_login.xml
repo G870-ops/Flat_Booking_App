@@ -26,6 +26,8 @@
         android:background="@android:drawable/edit_text"
         android:layout_marginBottom="16dp"/>
 
+    <EditText android:id="@+id/email" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" />
+
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
@@ -35,6 +37,8 @@
         android:padding="12dp"
         android:background="@android:drawable/edit_text"
         android:layout_marginBottom="8dp"/>
+
+    <EditText android:id="@+id/password" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" />
 
     <TextView
         android:id="@+id/tvForgotPassword"
@@ -65,6 +69,8 @@
         android:text="Login"
         android:backgroundTint="#4CAF50"
         android:layout_marginBottom="16dp"/>
+
+    <Button android:id="@+id/loginBtn" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" />
 
     <Button
         android:id="@+id/btnSignup"

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0F2F5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="System Administration"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:textColor="#1A237E"
+            android:layout_marginBottom="24dp"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="8dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Usage Analytics"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tvStats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Active Users: 1,240 | New Listings: 45"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp">
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/propertyPieChart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="8dp" />
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnManageUsers"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Approve/Reject Landlords"
+            android:backgroundTint="#1A237E"
+            android:layout_marginBottom="12dp"/>
+
+        <Button
+            android:id="@+id/btnModerateListings"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Moderate Property Listings"
+            android:backgroundTint="#D32F2F"
+            android:layout_marginBottom="12dp"/>
+
+        <Button
+            android:id="@+id/btnHandleDisputes"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Reports &amp; Disputes"
+            android:backgroundTint="#FFA000" />
+
+    </LinearLayout>
+</ScrollView>

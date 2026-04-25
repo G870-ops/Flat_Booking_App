@@ -29,7 +29,10 @@ class ProfileFragment : Fragment() {
 
         val btnListProperty = view.findViewById<Button>(R.id.btnListProperty)
         val btnPostHistory = view.findViewById<Button>(R.id.btnPostHistory)
-
+        val btnPayments = view.findViewById<Button>( R.id.btnPayments)
+        val btnContract = view.findViewById<Button>(R.id.btnContract)
+        val btnReview =view.findViewById<Button>(R.id.btnReview)
+        val btnRecommendation =view.findViewById<Button>(R.id.btnRecommendation)
 
 
         val btnLogout = view.findViewById<Button>(R.id.btnLogout)
@@ -46,6 +49,11 @@ class ProfileFragment : Fragment() {
             btnSavedProperties?.visibility = View.GONE
             divBookings?.visibility = View.GONE
             divSaved?.visibility = View.GONE
+            btnPayments?.visibility = View.VISIBLE
+            btnReview?.visibility = View.VISIBLE
+            btnRecommendation?.visibility = View.VISIBLE
+            btnContract?.visibility = View.VISIBLE
+
 
 
             btnListProperty?.setOnClickListener {
@@ -53,7 +61,28 @@ class ProfileFragment : Fragment() {
                 startActivity(intent)
             }
             btnPostHistory?.setOnClickListener {
-                val intent = Intent(requireContext(), ListPropertyActivity::class.java)
+                val intent = Intent(requireContext(), PostedHistoryActivity::class.java)
+                startActivity(intent)
+            }
+
+            btnPayments?.setOnClickListener {
+                // This now actually triggers the transition to the new screen
+                val intent = Intent(requireContext(), PaymentActivity::class.java)
+                startActivity(intent)
+            }
+            btnContract?.setOnClickListener {
+                val intent = Intent(requireContext(), ContractActivity::class.java)
+                startActivity(intent)
+            }
+
+
+            btnReview?.setOnClickListener {
+                // This now actually triggers the transition to the new screen
+                val intent = Intent(requireContext(), ReviewActivity::class.java)
+                startActivity(intent)
+            }
+            btnRecommendation?.setOnClickListener {
+                val intent = Intent(requireContext(), RecommendationActivity::class.java)
                 startActivity(intent)
             }
 
@@ -62,6 +91,10 @@ class ProfileFragment : Fragment() {
             // Hide Landlord Dashboard Buttons
             btnListProperty?.visibility = View.GONE
             btnPostHistory?.visibility = View.GONE
+            btnPayments?.visibility = View.GONE
+            btnReview?.visibility = View.GONE
+            btnRecommendation?.visibility = View.GONE
+            btnContract?.visibility = View.GONE
 
 
 
@@ -73,8 +106,6 @@ class ProfileFragment : Fragment() {
             btnSavedProperties?.setOnClickListener {
                 activity?.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottom_navigation)?.selectedItemId = R.id.nav_saved
             }
-
-
 
 
         }

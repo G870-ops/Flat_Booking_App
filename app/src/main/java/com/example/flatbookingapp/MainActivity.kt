@@ -6,35 +6,48 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth // NEW IMPORT
 
 class MainActivity : AppCompatActivity() {
 
-    // Store the role at the class level to avoid repeated intent calls
+    // Store the role at the class level
     private var currentUserRole: String = "STUDENT"
+
+    // --- NEW FEATURE: FIREBASE AUTH INSTANCE ---
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // 1. --- NEW FEATURE: SESSION VALIDATION ---
+        auth = FirebaseAuth.getInstance()
+        val user = auth.currentUser
+
+        // If no user is logged in via Firebase, redirect to Login
+        if (user == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return // Stop further execution
+        }
+
         setContentView(R.layout.activity_main)
 
-        // 1. Capture the Role safely
+        // 2. Capture the Role safely (Existing logic)
         currentUserRole = intent.getStringExtra("USER_TYPE") ?: "STUDENT"
 
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        val menu = bottomNav.menu // Access the menu for visibility control
+        val menu = bottomNav.menu
 
-        // --- NEW FEATURE: UNCOMMON ROLE-BASED VISIBILITY ---
+        // --- EXISTING FEATURE: ROLE-BASED VISIBILITY ---
         if (currentUserRole == "LANDLORD") {
-            // Landlord View: Show 'List Property', Hide 'Bookings' (nav_saved)
             menu.findItem(R.id.nav_list_property).isVisible = true
             menu.findItem(R.id.nav_saved).isVisible = false
             Toast.makeText(this, "Welcome, Landlord Portal", Toast.LENGTH_SHORT).show()
         } else {
-            // Student View: Show 'Bookings' (nav_saved), Hide 'List Property'
             menu.findItem(R.id.nav_list_property).isVisible = false
             menu.findItem(R.id.nav_saved).isVisible = true
             Toast.makeText(this, "Welcome, Student Portal", Toast.LENGTH_SHORT).show()
         }
-        // --------------------------------------------------
 
         if (savedInstanceState == null) {
             loadFragment(HomeFragment())
@@ -58,7 +71,6 @@ class MainActivity : AppCompatActivity() {
                     loadFragment(ProfileFragment())
                     true
                 }
-                // --- NEW FEATURE: LIST PROPERTY ACTION ---
                 R.id.nav_list_property -> {
                     val intent = Intent(this, ListPropertyActivity::class.java)
                     startActivity(intent)
@@ -74,19 +86,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun loadFragment(fragment: Fragment) {
-        // Data Isolation: Pass the role to fragments
         val bundle = Bundle()
         bundle.putString("USER_TYPE", currentUserRole)
         fragment.arguments = bundle
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment) // Using your original container ID
+            .replace(R.id.fragment_container, fragment)
             .commit()
     }
 
     private fun performLogout() {
+        // --- NEW FEATURE: SIGN OUT FROM FIREBASE ---
+        auth.signOut()
+
         val logoutIntent = Intent(this, WelcomeActivity::class.java)
-        // Clear session and activity stack
         logoutIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(logoutIntent)
         finish()

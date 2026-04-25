@@ -119,14 +119,42 @@
                     android:text="List New Property"
                     android:backgroundTint="#1565C0"
                     android:layout_marginBottom="8dp"/>
+
                 <Button
                     android:id="@+id/btnPostHistory"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
                     android:text="Post History"
                     android:backgroundTint="#4CAF50"
-                    android:layout_marginBottom="12dp"/>
+                    android:layout_marginBottom="8dp"/>
 
+                <Button
+                    android:id="@+id/btnPayments"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="Payments &amp; Contracts"
+                    android:backgroundTint="#FF9800"
+                    android:layout_marginTop="12dp"/>
+                <Button
+                    android:id="@+id/btnContract"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="Contracts management (digital agreements)"
+                    android:backgroundTint="#FF9800"
+                    android:layout_marginTop="12dp"/>
+
+                <Button
+                    android:id="@+id/btnReview"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="Reviews &amp; Ratings"
+                    android:layout_marginTop="12dp"/>
+                <Button
+                    android:id="@+id/btnRecommendation"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="Recommendations"
+                    android:layout_marginTop="12dp"/>
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -142,11 +170,12 @@
             android:clickable="true"
             android:focusable="true"
             android:background="?attr/selectableItemBackground"/>
+
         <View
-        android:id="@+id/dividerBookings"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#E0E0E0"/>
+            android:id="@+id/dividerBookings"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E0E0E0"/>
 
         <TextView
             android:id="@+id/btnSavedProperties"
@@ -176,7 +205,9 @@
             android:drawablePadding="16dp"
             android:clickable="true"
             android:focusable="true"
-            android:background="?attr/selectableItemBackground"/> <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0"/>
+            android:background="?attr/selectableItemBackground"/>
+
+        <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0"/>
 
         <TextView
             android:id="@+id/btnSettings"
@@ -191,7 +222,6 @@
             android:background="?attr/selectableItemBackground"/>
 
         <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#E0E0E0"/>
-
 
         <Button
             android:id="@+id/btnLogout"

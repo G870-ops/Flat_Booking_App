@@ -3,10 +3,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp">
+    android:padding="20dp"
+    android:background="#FFFFFF">
 
-    <EditText android:id="@+id/etSignupName" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Full Name"/>
-    <EditText android:id="@+id/etSignupEmail" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Email"/>
-    <EditText android:id="@+id/etSignupPassword" android:layout_width="match_parent" android:layout_height="wrap_content" android:hint="Password" android:inputType="textPassword"/>
-    <Button android:id="@+id/btnCreateAccount" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="Create Account" android:layout_marginTop="20dp"/>
+    <EditText
+        android:id="@+id/etSignupName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Full Name"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/etSignupEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:minHeight="48dp" />
+
+    <EditText android:id="@+id/email" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/etSignupPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:minHeight="48dp" />
+
+    <EditText android:id="@+id/password" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnCreateAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Account"
+        android:layout_marginTop="20dp"/>
+
+    <Button android:id="@+id/signupBtn" android:layout_width="0dp" android:layout_height="0dp" android:visibility="gone" />
+
 </LinearLayout>

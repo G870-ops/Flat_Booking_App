@@ -1,31 +1,39 @@
 package com.example.flatbookingapp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 
 class WelcomeActivity : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_welcome)
 
-        // 1. User Button Logic
-        // Navigates to LoginActivity and tells it the role is "USER"
+        // 1. User Button Logic (STAYS THE SAME)
         findViewById<Button>(R.id.btnUser).setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             intent.putExtra("ROLE", "USER")
             startActivity(intent)
-            // finish() // Optional: remove if you want users to be able to come back to choice screen
         }
 
-        // 2. Admin Button Logic
-        // Navigates to LoginActivity and tells it the role is "ADMIN"
+        // 2. Landlord Button Logic (RE-LABELED FOR CLARITY)
+        // This is your existing "Admin" button logic, now correctly labeled as LANDLORD
         findViewById<Button>(R.id.btnAdmin).setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             intent.putExtra("ROLE", "LANDLORD")
             startActivity(intent)
-            // finish() // Optional: remove if you want admins to be able to come back to choice screen
+        }
+
+        // --- NEW FEATURE: SUPER ADMIN ENTRY POINT ---
+        // 3. Super Admin Logic (Hidden or specific button)
+        // If you add a button with ID btnSuperAdmin in your XML, use this:
+        findViewById<Button>(R.id.btnAdminDashboard)?.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.putExtra("ROLE", "ADMIN") // This triggers the Admin Panel logic
+            startActivity(intent)
         }
     }
 }

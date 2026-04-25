@@ -4,21 +4,25 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
+
+    private lateinit var auth: FirebaseAuth
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // 1. Get the Role passed from WelcomeActivity (Defaults to USER if null)
+        // Initialize Firebase Auth
+        auth = FirebaseAuth.getInstance()
+
         val selectedRole = intent.getStringExtra("ROLE") ?: "USER"
 
         val etEmail = findViewById<EditText>(R.id.etEmail)
@@ -29,11 +33,9 @@ class LoginActivity : AppCompatActivity() {
         val tvForgotPassword = findViewById<TextView>(R.id.tvForgotPassword)
         val tvForgotUsername = findViewById<TextView>(R.id.tvForgotUsername)
 
-        // Update UI Title based on role
         tvLoginTitle.text = "$selectedRole LOGIN"
 
         // --- NAVIGATION LISTENERS ---
-
         tvForgotPassword.setOnClickListener {
             startActivity(Intent(this, ResetPasswordActivity::class.java))
         }
@@ -46,8 +48,6 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, SignupActivity::class.java))
         }
 
-        // --- LOGIN LOGIC ---
-
         btnLogin.setOnClickListener {
             val email = etEmail.text.toString().trim()
             val pass = etPassword.text.toString().trim()
@@ -57,26 +57,49 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // UNIFIED LOGIN VALIDATION
-            if (selectedRole == "USER") {
-                if (email == "goutam435@gmail.com" && pass == "Goutam435@") {
-                    navigateToMain(selectedRole)
-                } else {
-                    Toast.makeText(this, "Invalid User Credentials", Toast.LENGTH_SHORT).show()
-                }
+            // 1. --- ADMIN LOGIN CHECK (EXISTING) ---
+            if (email == "admin@studentstay.com" && pass == "Admin123") {
+                val intent = Intent(this, AdminDashboardActivity::class.java)
+                startActivity(intent)
+                Toast.makeText(this, "Admin Login Successful", Toast.LENGTH_SHORT).show()
+                finish()
+                return@setOnClickListener
+            }
 
-            } else if (selectedRole == "LANDLORD") {
-                if (email == "priyam435@gmail.com" && pass == "Priyam435@") {
-                    navigateToMain(selectedRole)
-                } else {
-                    Toast.makeText(this, "Invalid Landlord Credentials", Toast.LENGTH_SHORT).show()
-                }
+            // 2. --- HARDCODED ROLE VALIDATION (EXISTING) ---
+            var isHardcodedMatch = false
+            if (selectedRole == "USER" && email == "goutam435@gmail.com" && pass == "Goutam435@") {
+                isHardcodedMatch = true
+            } else if (selectedRole == "LANDLORD" && email == "priyam435@gmail.com" && pass == "Priyam435@") {
+                isHardcodedMatch = true
+            }
+
+            if (isHardcodedMatch) {
+                navigateToMain(selectedRole)
+            } else {
+                // 3. --- FIREBASE AUTHENTICATION (NEW FEATURE) ---
+                // If hardcoded check fails, try to authenticate via Firebase
+                performFirebaseLogin(email, pass, selectedRole)
             }
         }
     }
 
+    private fun performFirebaseLogin(email: String, pass: String, role: String) {
+        auth.signInWithEmailAndPassword(email, pass)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    navigateToMain(role)
+                } else {
+                    Toast.makeText(
+                        this,
+                        "Login Failed: ${task.exception?.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+    }
+
     private fun navigateToMain(selectedRole: String) {
-        // Save role to SharedPreferences for persistent sessions
         val sharedPref = getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         with(sharedPref.edit()) {
             putString("USER_TYPE", selectedRole)
@@ -86,7 +109,7 @@ class LoginActivity : AppCompatActivity() {
         Toast.makeText(this, "$selectedRole Login Successful", Toast.LENGTH_SHORT).show()
 
         val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("USER_TYPE", selectedRole) // Ensure this is "LANDLORD"
+        intent.putExtra("USER_TYPE", selectedRole)
         startActivity(intent)
         finish()
     }
