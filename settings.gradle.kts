@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 pluginManagement {
     repositories {
         google {
@@ -20,6 +21,12 @@ dependencyResolutionManagement {
         maven { url = uri("https://jitpack.io") }
     }
 }
+=======
+rootProject.name = "flatbooking-backend"
+>>>>>>> 2c0e7e79584e2f7d5a36a82b32a9a5f7e651e177
 
-rootProject.name = "Flat Booking"
-include(":app")
+dependencyResolutionManagement {
+    repositories {
+        mavenCentral()
+    }
+}
